@@ -8,7 +8,6 @@
     body, html {
       margin: 0;
       padding: 0;
-      height: 100%;
       font-family: Arial, sans-serif;
       background: #f9f9f9;
     }
@@ -26,16 +25,6 @@
       font-family: 'Arial Black', sans-serif;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     }
-    .calendar-container {
-      width: 100%;
-      height: calc(100vh - 80px);
-      overflow: hidden;
-    }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
     .container {
       max-width: 900px;
       margin: 2rem auto;
@@ -45,9 +34,8 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
     h2 {
-      margin-bottom: 1rem;
       text-align: center;
-      font-weight: 700;
+      margin-bottom: 1rem;
     }
     form {
       display: flex;
@@ -73,6 +61,22 @@
     button:hover {
       background: #444;
     }
+    .calendar-container {
+      width: 100%;
+      height: 500px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .lang-select {
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: flex-end;
+    }
   </style>
 </head>
 <body>
@@ -81,52 +85,65 @@
   <h1 class="title">🐾 Local Leash 🐾</h1>
 </header>
 
+<div class="lang-select">
+  <label for="language">Language:</label>
+  <select id="language" onchange="switchLang()">
+    <option value="en">English</option>
+    <option value="de">Deutsch</option>
+  </select>
+</div>
+
 <div class="calendar-container">
   <iframe src="https://calendar.google.com/calendar/embed?src=0f023ffd2651a7a362ee82d44f9c412767ff850a6d26b6766dd05423b0c1c8b9%40group.calendar.google.com&ctz=Europe%2FZurich" scrolling="no"></iframe>
 </div>
 
 <div class="container">
-  <h2>Book Your Dog Service</h2>
+  <h2 id="formTitle">Book Your Dog Service</h2>
   <form action="https://formspree.io/f/mnndwybk" method="POST">
-    <label>Your Name:</label>
+    <label data-en="Your Name" data-de="Dein Name">Your Name</label>
     <input type="text" name="name" required />
 
-    <label>Dog's Name:</label>
+    <label data-en="Dog's Name" data-de="Name des Hundes">Dog's Name</label>
     <input type="text" name="dogname" required />
 
-    <label>Service:</label>
+    <label data-en="Service" data-de="Service">Service</label>
     <select name="service" required>
-      <option value="">-- Please choose --</option>
+      <option value="">-- Choose --</option>
       <option value="Dog Walking">Dog Walking</option>
       <option value="Dog Sitting">Dog Sitting</option>
     </select>
 
-    <label>Start Time:</label>
+    <label data-en="Start Time" data-de="Startzeit">Start Time</label>
     <input type="datetime-local" name="starttime" required />
 
-    <label>Full Address:</label>
-    <textarea name="address" placeholder="Street, city, zip" required></textarea>
+    <label data-en="Full Address" data-de="Adresse">Full Address</label>
+    <textarea name="address" required></textarea>
 
-    <label>Payment Method:</label>
+    <label data-en="Payment Method" data-de="Zahlungsmethode">Payment Method</label>
     <select name="payment" required>
-      <option value="">-- Choose a payment method --</option>
+      <option value="">-- Choose --</option>
       <option value="Cash">Cash</option>
       <option value="Twint">Twint</option>
     </select>
 
-    <label>Language:</label>
-    <select name="language" required>
-      <option value="">-- Select --</option>
-      <option value="English">English</option>
-      <option value="Deutsch">Deutsch</option>
-    </select>
+    <label data-en="Notes" data-de="Notizen">Notes</label>
+    <textarea name="notes"></textarea>
 
-    <label>Notes:</label>
-    <textarea name="notes" placeholder="E.g. how long you need, special instructions, etc."></textarea>
-
-    <button type="submit">Book Now</button>
+    <button type="submit" data-en="Book Now" data-de="Jetzt Buchen">Book Now</button>
   </form>
 </div>
+
+<script>
+  function switchLang() {
+    let lang = document.getElementById('language').value;
+    document.querySelectorAll('label, button, h2').forEach(el => {
+      if (el.dataset[lang]) {
+        el.textContent = el.dataset[lang];
+      }
+    });
+    document.getElementById('formTitle').textContent = lang === 'en' ? 'Book Your Dog Service' : 'Buche deinen Hundeservice';
+  }
+</script>
 
 </body>
 </html>
