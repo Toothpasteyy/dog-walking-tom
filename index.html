@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tom's Dog Walk Booking 🐶</title>
+  <title>Local Leash 🐶</title>
   <style>
     body, html {
       margin: 0;
@@ -49,7 +49,7 @@
     form label {
       font-weight: bold;
     }
-    input, textarea, button {
+    input, textarea, select, button {
       padding: 0.75rem;
       font-size: 1rem;
       border: 1px solid #ccc;
@@ -65,27 +65,56 @@
     button:hover {
       background: #444;
     }
+    .payment-options {
+      display: flex;
+      gap: 1rem;
+    }
+    .payment-options label {
+      font-weight: normal;
+    }
   </style>
 </head>
 <body>
 
-<header>Tom's Dog Walk Booking 🐶</header>
+<header>Local Leash 🐶</header>
 
 <div class="calendar-container">
   <iframe src="https://calendar.google.com/calendar/embed?src=0f023ffd2651a7a362ee82d44f9c412767ff850a6d26b6766dd05423b0c1c8b9%40group.calendar.google.com&ctz=Europe%2FZurich" scrolling="no"></iframe>
 </div>
 
 <div class="container">
-  <h2>Book Your Dog Walk</h2>
+  <h2>Book Your Dog Walk / Buche deinen Spaziergang 🐾</h2>
   <form action="https://formspree.io/f/mnndwybk" method="POST">
-    <input type="text" name="name" placeholder="Your Name" required />
-    <input type="text" name="dogname" placeholder="Dog's Name" required />
 
-    <label>Start Time:</label>
+    <label>Your Name / Dein Name:</label>
+    <input type="text" name="name" placeholder="Your Name / Dein Name" required />
+
+    <label>Dog's Name / Name des Hundes:</label>
+    <input type="text" name="dogname" placeholder="Dog's Name / Name des Hundes" required />
+
+    <label>Start Time / Startzeit:</label>
     <input type="datetime-local" name="starttime" required />
-    
-    <textarea name="notes" placeholder="Any notes? (e.g. how long you need, special instructions, etc.)"></textarea>
-    <button type="submit">Book Now</button>
+
+    <label>Full Address / Adresse:</label>
+    <input type="text" name="address" placeholder="Full address / Adresse" required />
+
+    <label>Payment Method / Zahlungsmethode:</label>
+    <div class="payment-options">
+      <label><input type="radio" name="payment" value="Cash" required /> Cash</label>
+      <label><input type="radio" name="payment" value="Twint" required /> Twint</label>
+    </div>
+
+    <label>Preferred Language / Sprache:</label>
+    <select name="language" required>
+      <option value="">Select / Wählen</option>
+      <option value="English">English</option>
+      <option value="Deutsch">Deutsch</option>
+    </select>
+
+    <label>Notes / Bemerkungen:</label>
+    <textarea name="notes" placeholder="Any notes? (e.g. how long you need, special instructions, etc.) / Anmerkungen (z.B. Dauer, spezielle Wünsche, etc.)"></textarea>
+
+    <button type="submit">Book Now / Jetzt Buchen</button>
   </form>
 </div>
 
