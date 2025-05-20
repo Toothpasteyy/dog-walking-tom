@@ -35,7 +35,7 @@
     }
     h2 {
       text-align: center;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
     form {
       display: flex;
@@ -73,9 +73,17 @@
       border: none;
     }
     .lang-select {
-      margin-bottom: 1rem;
       display: flex;
-      justify-content: flex-end;
+      align-items: center;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .lang-select label {
+      font-weight: bold;
+    }
+    select {
+      max-width: 150px;
     }
   </style>
 </head>
@@ -85,20 +93,22 @@
   <h1 class="title">🐾 Local Leash 🐾</h1>
 </header>
 
-<div class="lang-select">
-  <label for="language">Language:</label>
-  <select id="language" onchange="switchLang()">
-    <option value="en">English</option>
-    <option value="de">Deutsch</option>
-  </select>
-</div>
-
 <div class="calendar-container">
   <iframe src="https://calendar.google.com/calendar/embed?src=0f023ffd2651a7a362ee82d44f9c412767ff850a6d26b6766dd05423b0c1c8b9%40group.calendar.google.com&ctz=Europe%2FZurich" scrolling="no"></iframe>
 </div>
 
 <div class="container">
+
+  <div class="lang-select">
+    <label for="language">Language:</label>
+    <select id="language" onchange="switchLang()">
+      <option value="en">English 🇬🇧</option>
+      <option value="de">Deutsch 🇩🇪</option>
+    </select>
+  </div>
+
   <h2 id="formTitle">Book Your Dog Service</h2>
+
   <form action="https://formspree.io/f/mnndwybk" method="POST">
     <label data-en="Your Name" data-de="Dein Name">Your Name</label>
     <input type="text" name="name" required />
